@@ -52,3 +52,20 @@ provider "aws" {
 
 
 # 4. Create an EC2 and install docker (use the user_data)
+
+resource "aws_instance" "LEMON_TEA" {
+
+  ami           = "ami-047a51fa27710816e"
+  instance_type = "t2.micro"
+
+  user_data = <<-EOF
+		#! /bin/bash
+        sudo yum update
+		sudo yum install -y docker
+		sudo systemctl start docker
+	EOF
+
+  tags          = {
+    Name        = "Lemon_Ginger_Tea"
+  }
+}
